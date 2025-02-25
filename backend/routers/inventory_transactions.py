@@ -2,6 +2,7 @@
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session, joinedload
+from datetime import datetime
 from database import get_db
 from models.inventory_transactions import InventoryTransaction as TransactionModel
 from models.inventory_transactions import InventoryTransactionDetail as TransactionDetailModel
