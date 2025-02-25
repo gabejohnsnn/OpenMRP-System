@@ -44,38 +44,121 @@ OpenMRP is a comprehensive, web-based MRP system designed to help manufacturers 
 - PostgreSQL database
 - Docker (optional)
 
-### Installation
+### Installation and Setup
+
+#### Using Docker (Recommended)
 
 1. Clone the repository
-2. Set up the backend:
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+   ```bash
+   git clone https://github.com/gabejohnsnn/OpenMRP-System.git
+   cd OpenMRP-System
+   ```
+
+2. Start the application using Docker Compose
+   ```bash
+   docker-compose up -d
+   ```
+
+3. Access the application
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - API Documentation: http://localhost:8000/docs
+
+#### Manual Setup
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/gabejohnsnn/OpenMRP-System.git
+   cd OpenMRP-System
+   ```
+
+2. Set up the backend
+   ```bash
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+3. Set up the frontend
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+4. Start the PostgreSQL database
+   ```bash
+   # Using Docker
+   docker run --name openmrp-db \
+     -e POSTGRES_USER=openMRP \
+     -e POSTGRES_PASSWORD=password \
+     -e POSTGRES_DB=openMRP \
+     -p 5432:5432 \
+     -d postgres:14
+   ```
+
+5. Start the backend server
+   ```bash
+   cd backend
+   uvicorn main:app --reload
+   ```
+
+6. Start the frontend development server
+   ```bash
+   cd frontend
+   npm start
+   ```
+
+7. Access the application
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - API Documentation: http://localhost:8000/docs
+
+## Project Structure
+
+```
+OpenMRP-System/
+├── backend/                  # FastAPI backend
+│   ├── models/               # Database models
+│   ├── routers/              # API routes
+│   ├── schemas/              # Pydantic schemas
+│   ├── main.py               # Main application entry point
+│   └── database.py           # Database connection
+├── frontend/                 # React frontend
+│   ├── public/               # Static assets
+│   └── src/                  # Source code
+│       ├── components/       # React components
+│       ├── services/         # API service modules
+│       └── App.js            # Root component
+└── docker-compose.yml        # Docker configuration
 ```
 
-3. Set up the frontend:
-```bash
-cd frontend
-npm install
-```
+## Future Enhancements
 
-4. Start the development servers:
-```bash
-# Backend
-cd backend
-uvicorn main:app --reload
+1. **Capacity Planning**
+   - Add work centers with capacity constraints
+   - Schedule production based on available capacity
+   - Visualize production load with Gantt charts
 
-# Frontend
-cd frontend
-npm start
-```
+2. **Quality Management**
+   - Add quality control checkpoints
+   - Record inspection results
+   - Track non-conformances
 
-## License
+3. **Dashboard & Reporting**
+   - Create KPI dashboards
+   - Generate production reports
+   - Add data visualization
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+4. **User Management & Security**
+   - Add user authentication and authorization
+   - Role-based access control
+   - Activity logging
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests.
+
+## License
+
+This project is licensed under the MIT License.
