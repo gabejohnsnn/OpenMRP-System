@@ -17,6 +17,9 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
+// Import components
+import InventoryList from './components/InventoryList';
+
 const drawerWidth = 240;
 
 function App() {
@@ -175,7 +178,7 @@ function AppContent() {
             <Route path="/" element={<Dashboard />} />
             
             {/* Inventory */}
-            <Route path="/inventory" element={<div>Inventory Management</div>} />
+            <Route path="/inventory" element={<InventoryList />} />
             <Route path="/inventory/transactions" element={<div>Inventory Transactions</div>} />
             
             {/* BOM */}
